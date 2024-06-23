@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
 
 const routes: RouteRecordRaw[] = [
-	// { path: '/', redirect: { name: 'home' } },
 	{
 		path: '/',
 		redirect: (to) => {
@@ -14,12 +13,20 @@ const routes: RouteRecordRaw[] = [
 		path: '/welcome',
 		// props: (route) => ({ message: route.query.message }),
 		components: {
-			default: () => import('@/components/Welcome.vue'),
+			default: () => import('@/views/Welcome.vue'),
 			LeftSidebar: () => import('@/layouts/SideBar.vue'),
 		},
 		// component: Welcome,
 		meta: { title: 'Welcome' },
 	},
+	{
+		name: 'Vuetify',
+		path: '/vuetify',
+		components: {
+			default: () => import('@/views/VuetifyComponents.vue'),
+			LeftSidebar: () => import('@/layouts/SideBar.vue'),
+		}
+	}
 ]
 
 export const router = createRouter({
