@@ -1,7 +1,5 @@
 import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
 
-import Welcome from '@/components/Welcome.vue'
-
 const routes: RouteRecordRaw[] = [
 	// { path: '/', redirect: { name: 'home' } },
 	{
@@ -11,17 +9,15 @@ const routes: RouteRecordRaw[] = [
 			return { path: '/welcome', query: { message: 'Welcome to here' } }
 		},
 	},
-	// {
-	// 	name: 'home',
-	// 	path: '/home',
-	// 	component: HelloWorld,
-	// 	meta: { title: 'Home' },
-	// },
 	{
 		name: 'welcome',
 		path: '/welcome',
-		props: (route) => ({ message: route.query.message }),
-		component: Welcome,
+		// props: (route) => ({ message: route.query.message }),
+		components: {
+			default: () => import('@/components/Welcome.vue'),
+			LeftSidebar: () => import('@/layouts/SideBar.vue'),
+		},
+		// component: Welcome,
 		meta: { title: 'Welcome' },
 	},
 ]
