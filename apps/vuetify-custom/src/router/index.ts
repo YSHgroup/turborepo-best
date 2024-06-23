@@ -1,13 +1,14 @@
-import { createMemoryHistory, createRouter, RouteRecordRaw } from 'vue-router'
+import { createWebHistory, createRouter, RouteRecordRaw } from 'vue-router'
 
-import HelloWorld from '../components/HelloWorld.vue'
+import Welcome from '@/components/Welcome.vue'
 
 const routes: RouteRecordRaw[] = [
 	// { path: '/', redirect: { name: 'home' } },
 	{
 		path: '/',
 		redirect: (to) => {
-			return { path: '/welcome/hello' }
+			console.log('route: ', to)
+			return { path: '/welcome', query: { message: 'Welcome to here' } }
 		},
 	},
 	// {
@@ -17,15 +18,15 @@ const routes: RouteRecordRaw[] = [
 	// 	meta: { title: 'Home' },
 	// },
 	{
-		name: 'welcome msg',
-		path: '/welcome/:msg',
-		props: true,
-		component: HelloWorld,
+		name: 'welcome',
+		path: '/welcome',
+		props: (route) => ({ message: route.query.message }),
+		component: Welcome,
 		meta: { title: 'Welcome' },
 	},
 ]
 
 export const router = createRouter({
-	history: createMemoryHistory(),
+	history: createWebHistory(),
 	routes,
 })

@@ -1,17 +1,16 @@
 <script setup lang="ts">
 	import { ref } from 'vue'
 	defineProps({
-		msg: {
+		message: {
 			type: String,
-			default: 'Hello',
 		},
 	})
 	const count = ref(0)
 </script>
 
 <template>
-	<h1>{{ $route.params.msg }}</h1>
-	<h4>{{ msg }}</h4>
+	<h1>{{ $route.query.message }}</h1>
+	<h4>{{ message }}</h4>
 	<div class="card">
 		<button
 			type="button"
