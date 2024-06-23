@@ -10,6 +10,7 @@
     "dev:next": "turbo dev --filter=web"
   },
   "devDependencies": {
+    "@mdi/font": "^7.4.47",
     "prettier": "^3.2.5",
     "turbo": "^2.0.4",
     "typescript": "^5.4.5"
