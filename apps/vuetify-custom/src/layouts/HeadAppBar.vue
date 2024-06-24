@@ -1,4 +1,6 @@
 <script setup lang="ts">
+	import avatar from '../../public/avatar.jpg'
+	
 	const links = [
 		{
 			title: 'Dashboard',
@@ -28,7 +30,8 @@
 			<v-avatar
 				class="me-4"
 				color="grey-lighten-2"
-				size="32"
+				size="38"
+				:image="avatar"
 			></v-avatar>
 
 			<v-btn
