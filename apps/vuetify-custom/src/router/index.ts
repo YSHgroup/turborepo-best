@@ -11,21 +11,26 @@ const routes: RouteRecordRaw[] = [
 	{
 		name: 'welcome',
 		path: '/welcome',
-		// props: (route) => ({ message: route.query.message }),
+		// props: (route) => ({ message: route.query.message }), // allow search query to be passing as a props when using component property
 		components: {
 			default: () => import('@/views/Welcome.vue'),
 			LeftSidebar: () => import('@/layouts/SideBar.vue'),
 		},
-		// component: Welcome,
 		meta: { title: 'Welcome' },
 	},
 	{
 		name: 'Vuetify',
 		path: '/vuetify',
 		components: {
-			default: () => import('@/views/VuetifyComponents.vue'),
+			default: () => import('@/views/VuetifyComponents/index.vue'),
 			LeftSidebar: () => import('@/layouts/SideBar.vue'),
-		}
+		},
+		children: [
+			{
+				path: '/multi-search',
+				component: import('@/views/VuetifyComponents/MultiSearchField.vue')
+			}
+		]
 	}
 ]
 
