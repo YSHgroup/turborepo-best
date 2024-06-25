@@ -1,10 +1,10 @@
 <script setup lang="ts">
-	import { Location } from '@/models/location';
-  import { ref } from 'vue'
+	import { Location } from '@/models/location'
+	import { ref } from 'vue'
 
-  import locationData from '@/mock/location.json'
+	import locationData from '@/mock/location.json'
 
-	const locations = ref<Location[]>([
+	const locations = [
 		{
 			region: 'America',
 			cities: locationData.america,
@@ -17,7 +17,23 @@
 			region: 'Asia',
 			cities: locationData.asia,
 		},
-	])
+	]
+
+  const locationList = ref<Location[]>(locations)
+	const selectedValue = ref<Location>()
+
+  const searchItem = (value: string) => {
+    const filteredLocations = locations.map((location) => {
+      const filteredCities = location.cities.filter((city) => city.name.toLowerCase().includes(value.toLowerCase()))
+      return { ...location, cities: filteredCities }
+    })
+
+    locationList.value = filteredLocations
+  }
+
+	const selectItem = (value: Location) => {
+		selectedValue.value = value
+	}
 </script>
 
 <template>
@@ -28,26 +44,33 @@
 		</v-col>
 		<v-divider vertical></v-divider>
 		<v-col cols="8">
-			<v-autocomplete 
-        label="Mulit Search"
-        variant="solo-filled"
-        :items="locations"
-        item-title="region"
-        chips
-        no-filter
-      >
-        <template v-slot:item="{item, props}">
-          <v-list class="my-n4">
-            <v-list-item-title class="bg-primary pa-3">
-              {{ item.title }}
-            </v-list-item-title>
-
-            <v-list-item
-              v-for="option in item.raw.cities"
-            >{{ option.name }}</v-list-item>
-          </v-list>
+			<v-autocomplete
+				label="Mulit Search"
+				variant="solo-filled"
+				chips
+				no-filter
+				:items="locationList"
+				item-title="region"
+				v-model="selectedValue"
+        @update:search="searchItem"
+			>
+        <template v-slot:chip="{item}">
+          <span>{{item.value.name}}</span>
         </template>
-    </v-autocomplete>
+				<template v-slot:item="{ item }">
+					<v-list class="my-n4">
+						<v-list-item-title class="bg-primary pa-3">
+							{{ item.title }}
+						</v-list-item-title>
+
+						<v-list-item
+							v-for="option in item.raw.cities"
+							@click="() => selectItem(option)"
+							>{{ option.name }}</v-list-item
+						>
+					</v-list>
+				</template>
+			</v-autocomplete>
 		</v-col>
 	</v-row>
 </template>
