@@ -21,13 +21,14 @@ const routes: RouteRecordRaw[] = [
 	{
 		name: 'Vuetify',
 		path: '/vuetify',
+		redirect: '/vuetify/multi-search',
 		components: {
 			default: () => import('@/views/VuetifyComponents/index.vue'),
 			LeftSidebar: () => import('@/layouts/SideBar.vue'),
 		},
 		children: [
 			{
-				path: '/multi-search',
+				path: 'multi-search',
 				component: import('@/views/VuetifyComponents/MultiSearchField.vue')
 			}
 		]

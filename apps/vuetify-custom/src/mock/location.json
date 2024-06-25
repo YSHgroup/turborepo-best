@@ -1,0 +1,17 @@
+{
+	"america": [
+		{ "id": 1, "name": "New York" },
+		{ "id": 2, "name": "Los Angeles" },
+		{ "id": 3, "name": "Chicago" }
+	],
+	"europ": [
+		{ "id": 1, "name": "Paris" },
+		{ "id": 2, "name": "London" },
+		{ "id": 3, "name": "Berlin" }
+	],
+	"asia": [
+		{ "id": 1, "name": "Tokyo" },
+		{ "id": 2, "name": "Taiwan" },
+		{ "id": 3, "name": "Hong Kong" }
+	]
+}
