@@ -19,20 +19,28 @@
 		},
 	]
 
-  const locationList = ref<Location[]>(locations)
+	const locationList = ref<Location[]>(locations)
 	const selectedValue = ref<Location>()
+	const menu = ref(false)
+	const search = ref('')
 
-  const searchItem = (value: string) => {
-    const filteredLocations = locations.map((location) => {
-      const filteredCities = location.cities.filter((city) => city.name.toLowerCase().includes(value.toLowerCase()))
-      return { ...location, cities: filteredCities }
-    })
+	const searchItem = (value: string) => {
+		search.value = value
+		const filteredLocations = locations.map((location) => {
+			const filteredCities = location.cities.filter((city) =>
+				city.name.toLowerCase().includes(value.toLowerCase())
+			)
+			return { ...location, cities: filteredCities }
+		})
 
-    locationList.value = filteredLocations
-  }
+		locationList.value = filteredLocations
+	}
 
 	const selectItem = (value: Location) => {
 		selectedValue.value = value
+		menu.value = false
+		search.value = ''
+		locationList.value = locations
 	}
 </script>
 
@@ -51,12 +59,15 @@
 				no-filter
 				:items="locationList"
 				item-title="region"
+				:menu="menu"
+				:search="search"
 				v-model="selectedValue"
-        @update:search="searchItem"
+				@update:menu="(val: boolean) => (menu = val)"
+				@update:search="searchItem"
 			>
-        <template v-slot:chip="{item}">
-          <span>{{item.value.name}}</span>
-        </template>
+				<template v-slot:chip="{ item }">
+					<span>{{ item.value.name }}</span>
+				</template>
 				<template v-slot:item="{ item }">
 					<v-list class="my-n4">
 						<v-list-item-title class="bg-primary pa-3">
