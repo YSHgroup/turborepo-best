@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@repo/ui": "*",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0",
+    "vue3-html2pdf": "^1.1.2",
     "vuetify": "^3.6.10"
   },
   "devDependencies": {
