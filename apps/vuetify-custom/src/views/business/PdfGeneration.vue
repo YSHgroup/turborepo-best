@@ -6,11 +6,12 @@
 	import GraphicCardTable from '@/components/business/GraphicCardTable.vue'
 
 	const contentToPrint = ref(null)
+	const cols = ref(6)
 
 	const downloadPdf = () => {
 		const element = contentToPrint.value
 		const options = {
-			margin: 1,
+			margin: 0.5,
 			filename: 'webpage.pdf',
 			image: { type: 'jpeg', quality: 0.98 },
 			html2canvas: { scale: 2 },
@@ -30,28 +31,24 @@
 			<p>This content will be converted to PDF.</p>
 
 			<v-row class="ma-0">
-				<v-col
-					cols="12"
-					sm="6"
-				>
+				<v-col cols="12" :sm="cols">
 					<graph-card></graph-card>
 				</v-col>
-				<v-col
-					cols="12"
-					sm="6"
-				>
+				<v-col cols="12" :sm="cols">
 					<graphic-card-table></graphic-card-table>
 				</v-col>
 			</v-row>
 		</div>
-		<v-btn
-			color="primary"
-			prepend-icon="mdi-download-circle"
-			variant="tonal"
-			class="text-subtitle-1"
-			@click="downloadPdf"
-			>Download as PDF</v-btn
-		>
+		<v-btn-toggle elevation="1" color="primary" divided>
+			<v-btn variant="outlined" @click="() => cols = cols == 6? 12: 6">{{cols == 6? "Vertical list": "Reset"}}</v-btn>
+			<v-btn
+				prepend-icon="mdi-download-circle"
+				variant="tonal"
+				class="text-subtitle-1"
+				@click="downloadPdf"
+				>Download as PDF</v-btn
+			>
+		</v-btn-toggle>
 	</div>
 </template>
 

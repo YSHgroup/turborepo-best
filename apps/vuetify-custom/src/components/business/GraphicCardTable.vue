@@ -1,5 +1,5 @@
 <template>
-	<v-card color="primary">
+	<v-card color="primary" max-width="1000" class="mx-auto">
 		<v-card-title class="d-flex align-center pe-2">
 			<v-icon icon="mdi-video-input-component"></v-icon> &nbsp; Find a Graphics Card
 			<v-spacer></v-spacer>

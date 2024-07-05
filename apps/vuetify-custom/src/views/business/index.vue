@@ -4,8 +4,7 @@
 
 <template>
     <v-sheet
-		min-height="70vh"
-		height="85vh"
+		min-height="85vh"
 		rounded="lg"
 		class="pa-6 text-center"
 	>

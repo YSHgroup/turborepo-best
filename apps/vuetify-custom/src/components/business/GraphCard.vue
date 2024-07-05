@@ -1,7 +1,7 @@
 <template>
 	<v-card
 		class="mx-auto text-center"
-		max-width="500"
+		max-width="700"
 		color="info"
 		outlined
 		dark
