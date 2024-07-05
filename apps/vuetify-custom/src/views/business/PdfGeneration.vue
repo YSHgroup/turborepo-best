@@ -2,6 +2,7 @@
 	import { ref } from 'vue'
 	import html2pdf from 'html2pdf.js'
 
+  	import GraphCard from '@/components/business/GraphCard.vue'
 
 	const contentToPrint = ref(null)
 
@@ -32,6 +33,7 @@
 					cols="12"
 					sm="6"
 				>
+					<graph-card></graph-card>
 				</v-col>
 				<v-col
 					cols="12"
