@@ -3,6 +3,7 @@
 	import html2pdf from 'html2pdf.js'
 
   	import GraphCard from '@/components/business/GraphCard.vue'
+	import GraphicCardTable from '@/components/business/GraphicCardTable.vue'
 
 	const contentToPrint = ref(null)
 
@@ -38,7 +39,9 @@
 				<v-col
 					cols="12"
 					sm="6"
-				></v-col>
+				>
+					<graphic-card-table></graphic-card-table>
+				</v-col>
 			</v-row>
 		</div>
 		<v-btn
