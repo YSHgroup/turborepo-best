@@ -11,8 +11,8 @@
 			to: '/vuetify',
 		},
 		{
-			title: 'No speicific',
-			to: '/',
+			title: 'Business components',
+			to: '/business',
 		},
 		{
 			title: 'No speicific',

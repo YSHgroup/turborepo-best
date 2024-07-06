@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-vue": "^6.0.0",
     "@repo/ui": "*",
+    "ckeditor5": "^42.0.0",
+    "html2pdf.js": "^0.10.2",
     "vue": "^3.4.29",
     "vue-router": "^4.4.0",
+    "vue3-html2pdf": "^1.1.2",
     "vuetify": "^3.6.10"
   },
   "devDependencies": {

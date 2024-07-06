@@ -29,8 +29,25 @@ const routes: RouteRecordRaw[] = [
 		children: [
 			{
 				path: 'multi-search',
-				component: import('@/views/VuetifyComponents/MultiSearchField.vue')
-			}
+				component: () =>
+					import('@/views/VuetifyComponents/MultiSearchField.vue'),
+			},
+		],
+	},
+	{
+		name: 'Business components',
+		path: '/business',
+		redirect: '/business/html2pdf',
+		components: {
+			default: () => import('@/views/business/index.vue'),
+			LeftSidebar: () => import('@/layouts/SideBar.vue'),
+		},
+		children: [
+			{
+				path: 'html2pdf',
+				component: () =>
+					import('@/views/business/PdfGeneration.vue'),
+			},
 		]
 	}
 ]
