@@ -4,6 +4,7 @@
 
   	import GraphCard from '@/components/business/GraphCard.vue'
 	import GraphicCardTable from '@/components/business/GraphicCardTable.vue'
+	import CkEditor from '@/components/business/CkEditor.vue'
 
 	const contentToPrint = ref(null)
 	const cols = ref(6)
@@ -36,6 +37,9 @@
 				</v-col>
 				<v-col cols="12" :sm="cols">
 					<graphic-card-table></graphic-card-table>
+				</v-col>
+				<v-col cols="12">
+					<ck-editor></ck-editor>
 				</v-col>
 			</v-row>
 		</div>
