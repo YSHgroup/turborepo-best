@@ -13,20 +13,27 @@ import { HousingService } from '../housing.service';
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  housingService: HousingService = inject(HousingService)
+  housingService: HousingService = inject(HousingService);
 
-  housingLocationList: HousingLocation[]
-  filteredLocationList: HousingLocation[]
+  housingLocationList: HousingLocation[] = [];
+  filteredLocationList: HousingLocation[] = [];
 
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations()
-    this.filteredLocationList = this.housingLocationList
+    this.housingService
+      .getAllHousingLocations()
+      .then((housingLocationList: HousingLocation[]) => {
+        this.housingLocationList = housingLocationList;
+        this.filteredLocationList = housingLocationList;
+      });
   }
   filterResults(text: string) {
-    if(!text) {
-      this.filteredLocationList = this.housingLocationList
+    if (!text) {
+      this.filteredLocationList = this.housingLocationList;
     } else {
-      this.filteredLocationList = this.housingLocationList.filter(housingLocation => housingLocation.city.toLowerCase().includes(text.toLowerCase()))
+      this.filteredLocationList = this.housingLocationList.filter(
+        (housingLocation) =>
+          housingLocation.city.toLowerCase().includes(text.toLowerCase()),
+      );
     }
   }
 }
