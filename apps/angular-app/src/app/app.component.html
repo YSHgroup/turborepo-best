@@ -1,8 +1,8 @@
 <main>
   <header class="brand-name d-flex column-gap-3 px-4 p-0">
-    <a [routerLink]="['/']" class="py-2">
+    <a [routerLink]="['/']" class="py-2 d-flex align-items-center">
       <img
-        src="/assets/logo.svg"
+        src="/assets/{{logo}}"
         class="brand-logo"
         alt="logo"
         aria-hidden="true"
@@ -17,7 +17,7 @@
     </nav>
   </header>
   <div class="d-flex">
-    <aside class="navbar bg-secondary vh-100 position-fixed z-8 mt-64 text-white">
+    <aside class="navbar bg-white border-end border-2 vh-100 position-fixed z-8 mt-64 text-grey">
       <app-side-nav></app-side-nav>
     </aside>
     <section class="content w-100 bg-body-secondary ms-300">

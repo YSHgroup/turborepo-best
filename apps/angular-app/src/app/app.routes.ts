@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './tutorial/home/home.component';
-import { AppComponent } from './app.component';
+import { KanbanMainComponent } from './kanban/kanban-main/kanban-main.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +26,7 @@ export const routes: Routes = [
       },
       {
         path: 'kanban',
-        component: ,
+        component: KanbanMainComponent,
         title: 'Kanban page',
       }
     ],
