@@ -26,6 +26,32 @@ $utilities: map-merge(
             ),
         )
       ),
+      "margin-top":  map-merge(
+        map-get($utilities, "margin-top"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-top"), "values"),
+              (
+                64: 64px,
+                300: 300px,
+              )
+            ),
+        )
+      ),
+      "margin-start":  map-merge(
+        map-get($utilities, "margin-start"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-start"), "values"),
+              (
+                64: 64px,
+                300: 300px,
+              )
+            ),
+        )
+      )
   )
 );
 
