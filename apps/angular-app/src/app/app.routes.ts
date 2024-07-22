@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './tutorial/home/home.component';
 import { AppComponent } from './app.component';
 
 export const routes: Routes = [
@@ -19,11 +19,16 @@ export const routes: Routes = [
         children: [
           {
             path: 'details/:id',
-            loadComponent: () => import('./details/details.component').then((c) => c.DetailsComponent),
+            loadComponent: () => import('./tutorial/details/details.component').then((c) => c.DetailsComponent),
             title: 'Home details',
           },
         ],
       },
+      {
+        path: 'kanban',
+        component: ,
+        title: 'Kanban page',
+      }
     ],
   },
 ];

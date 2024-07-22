@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './tutorial/home/home.component';
 import { SideNavComponent } from './layouts/side-nav/side-nav.component';
 import { CommonModule } from '@angular/common';
 
