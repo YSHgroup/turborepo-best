@@ -1,3 +1,62 @@
+// Import all of Bootstrap's CSS
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+
+$utilities: map-merge(
+  $utilities,
+  (
+    "width":
+      map-merge(
+        map-get($utilities, "width"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "width"), "values"),
+              (
+                10: 10%,
+                p15: 150px,
+                p25: 250px,
+                p30: 300px,
+              )
+            ),
+        )
+      ),
+      "margin-top":  map-merge(
+        map-get($utilities, "margin-top"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-top"), "values"),
+              (
+                64: 64px,
+                300: 300px,
+              )
+            ),
+        )
+      ),
+      "margin-start":  map-merge(
+        map-get($utilities, "margin-start"),
+        (
+          values:
+            map-merge(
+              map-get(map-get($utilities, "margin-start"), "values"),
+              (
+                64: 64px,
+                300: 300px,
+              )
+            ),
+        )
+      )
+  )
+);
+
+@import "bootstrap/scss/utilities/api";
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;

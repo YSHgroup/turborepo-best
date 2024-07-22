@@ -1,15 +1,27 @@
 <main>
-  <a [routerLink]="['/']">
-    <header class="brand-name">
+  <header class="brand-name d-flex column-gap-3 px-4 p-0">
+    <a [routerLink]="['/']" class="py-2">
       <img
         src="/assets/logo.svg"
         class="brand-logo"
         alt="logo"
         aria-hidden="true"
       />
-    </header>
-  </a>
-  <section class="content">
-    <router-outlet></router-outlet>
-  </section>
+    </a>
+    <nav class="d-flex align-items-end">
+      <ul class="nav nav-tabs">
+        <li class="nav-item" *ngFor="let item of navlinks">
+          <a class="nav-link" routerLinkActive="active" aria-current="page" [routerLink]="[item.path]">{{item.name}}</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="d-flex">
+    <aside class="navbar bg-secondary vh-100 position-fixed z-8 mt-64 text-white">
+      <app-side-nav></app-side-nav>
+    </aside>
+    <section class="content w-100 bg-body-secondary ms-300">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
 </main>
