@@ -1,0 +1,26 @@
+.task-card {
+    height: fit-content;
+    position: relative;
+    .color-bar {
+        position: absolute;
+        left: -11px;
+        top: -1px;
+        height: calc(100% + 2px);
+        width: 1px;
+        border: 5px solid transparent;
+        border-style: solid;
+        border-radius: 5px;
+    }
+    .btn-caret {
+        display: block;
+        padding: 2px;
+        height: 25px;
+        width: 25px;
+        text-align: center;
+        border-radius: 50%;
+        cursor: pointer;
+        &:hover {
+            background-color: #6f6f6f25;
+        }
+    }
+}
