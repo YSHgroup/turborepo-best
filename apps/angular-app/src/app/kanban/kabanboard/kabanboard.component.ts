@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-kabanboard',
@@ -10,5 +10,5 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons';
   styleUrl: './kabanboard.component.scss'
 })
 export class KabanboardComponent {
-  faCoffee = faCoffee
+  faPlus = faPlus
 }
