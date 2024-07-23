@@ -6,16 +6,17 @@ import {
   RouterModule,
   RouterOutlet,
 } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { HomeComponent } from './tutorial/home/home.component';
 import { SideNavComponent } from './layouts/side-nav/side-nav.component';
-import { CommonModule } from '@angular/common';
-import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterModule, HomeComponent, SideNavComponent],
+  imports: [CommonModule, RouterModule, FontAwesomeModule, HomeComponent, SideNavComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
