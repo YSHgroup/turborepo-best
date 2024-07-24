@@ -1,20 +1,19 @@
 <div class="task-card border rounded-end-2 p-2">
-    <div class="color-bar" style="border-right-color: greenyellow!important;"></div>
+    <div class="color-bar" [style.border-right-color]="task?.color"></div>
     <p class="task-title m-0 fw-semibold pb-1 mb-1 border-bottom">
-        <span>Title</span>
+        <span>{{task?.name}}</span>
         <span class="float-end btn-caret"><fa-icon [icon]="faCaretUp"></fa-icon></span>
     </p>
     <p class="task-description  m-0">
-        This is task description
+        {{task?.description}}
     </p>
     <ul>
-        <li>subtask - 1</li>
-        <li>subtask - 2</li>
+        <li *ngFor="let subtask of task?.subtasks">{{subtask.content}}</li>
     </ul>
     <div class="sub-task-input">
         <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">New</span>
-            <input type="text" class="form-control" id="subtask-input" placeholder="Input subtask text">
+            <span class="input-group-text" >New</span>
+            <input type="text" class="form-control" placeholder="Input subtask text">
         </div>
     </div>
 </div>

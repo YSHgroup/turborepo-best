@@ -9,23 +9,69 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, KabanboardComponent, TaskItemComponent],
   templateUrl: './kanban-main.component.html',
-  styleUrl: './kanban-main.component.scss'
+  styleUrl: './kanban-main.component.scss',
 })
 export class KanbanMainComponent {
-  kanbanList?: KabanBoardModel[]
+  kanbanList?: KabanBoardModel[] = [
+    {
+      id: 1,
+      name: 'To do',
+      tasks: [
+        {
+          id: 1,
+          name: 'Task 1',
+          description: 'This is task description 1',
+          color: 'red',
+          subtasks: [
+            { id: 1, content: 'Create task' },
+            { id: 2, content: 'Update task' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: 'Progress',
+      tasks: [
+        {
+          id: 1,
+          name: 'Task 1',
+          description: 'This is task description 1',
+          color: 'red',
+          subtasks: [
+            { id: 1, content: 'Create task' },
+            { id: 2, content: 'Update task' },
+          ],
+        },{
+          id: 1,
+          name: 'Task 2',
+          description: 'This is task description 2',
+          color: 'greenyellow',
+          subtasks: [
+            { id: 1, content: 'Create task' },
+            { id: 2, content: 'Update task' },
+          ],
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: 'Done',
+      tasks: [
+        {
+          id: 1,
+          name: 'Task 1',
+          description: 'This is task description 1',
+          color: 'red',
+          subtasks: [
+            { id: 1, content: 'Create task' },
+            { id: 2, content: 'Update task' },
+          ],
+        },
+      ],
+    },
+  ];
 
   constructor() {
-    this.kanbanList = [
-      {
-        id: 1,
-        name: 'To do',
-      },{
-        id: 2,
-        name: 'Progress',
-      },{
-        id: 3,
-        name: 'Done',
-      },
-  ]
   }
 }
