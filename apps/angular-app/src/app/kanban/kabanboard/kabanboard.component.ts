@@ -6,6 +6,9 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
   selector: 'app-kabanboard',
   standalone: true,
   imports: [FontAwesomeModule],
+  host: {
+    'class': 'card m-2 kanban-board shadow-sm'
+  },
   templateUrl: './kabanboard.component.html',
   styleUrl: './kabanboard.component.scss'
 })
