@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {faCaretUp} from '@fortawesome/free-solid-svg-icons'
 
@@ -10,5 +10,6 @@ import {faCaretUp} from '@fortawesome/free-solid-svg-icons'
   styleUrl: './task-item.component.scss'
 })
 export class TaskItemComponent {
+
   faCaretUp=faCaretUp
 }
