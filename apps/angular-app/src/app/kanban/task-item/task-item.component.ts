@@ -19,7 +19,7 @@ import { TaskModel } from '../../models/kaban';
   animations: [
     trigger('toggleTask', [
       state('open', style({
-        height: 'fit-content'
+        height: '150px'
       })),
       state('closed', style({
         height: '0px',
