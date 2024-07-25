@@ -19,13 +19,14 @@ import { TaskModel } from '../../models/kaban';
   animations: [
     trigger('toggleTask', [
       state('open', style({
-        height: '150px'
+        height: '*',
+        overflow: 'hidden'
       })),
       state('closed', style({
         height: '0px',
         overflow: 'hidden'
       })),
-      transition('open => closed, closed => open', [animate('0.2s ease-in')]),
+      transition('open => closed, closed => open', [animate('0.3s  ease-in')]),
     ]),
   ],
   templateUrl: './task-item.component.html',
