@@ -2,18 +2,20 @@
     <div class="color-bar" [style.border-right-color]="task?.color"></div>
     <p class="task-title m-0 fw-semibold pb-1 mb-1 border-bottom">
         <span>{{task?.name}}</span>
-        <span class="float-end btn-caret"><fa-icon [icon]="faCaretUp"></fa-icon></span>
+        <span class="float-end btn-caret" (click)="toggle()"><fa-icon [icon]="faCaretUp"></fa-icon></span>
     </p>
-    <p class="task-description  m-0">
-        {{task?.description}}
-    </p>
-    <ul>
-        <li *ngFor="let subtask of task?.subtasks">{{subtask.content}}</li>
-    </ul>
-    <div class="sub-task-input">
-        <div class="input-group mb-3">
-            <span class="input-group-text" >New</span>
-            <input type="text" class="form-control" placeholder="Input subtask text">
+    <div [@toggleTask]="isOpen ? 'open' : 'closed'">
+        <p class="task-description  m-0">
+            {{task?.description}}
+        </p>
+        <ul>
+            <li *ngFor="let subtask of task?.subtasks">{{subtask.content}}</li>
+        </ul>
+        <div class="sub-task-input">
+            <div class="input-group mb-3">
+                <span class="input-group-text" >New</span>
+                <input type="text" class="form-control" placeholder="Input subtask text">
+            </div>
         </div>
     </div>
 </div>
