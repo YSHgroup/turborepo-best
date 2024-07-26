@@ -1,11 +1,15 @@
 <div class="card-header text- fs-5 fw-semibold text-primary">
   <span>{{taskBoard?.name}}</span>
   <span class="float-end text-secondary">
-    <button class="btn btn-light">
-      <fa-icon [icon]="faPlus"></fa-icon>
+    <button class="btn btn-light" (click)="newTask()">
+      <fa-icon [icon]="faPlus" ></fa-icon>
     </button>
   </span>
 </div>
 <div class="card-body">
   <ng-content></ng-content>
 </div>
+
+<ng-container *ngIf="isTaskModalOpen">
+  <app-new-task />
+</ng-container>
