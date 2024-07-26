@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
 import { KabanBoardModel } from '../../models/kaban';
 
 @Component({

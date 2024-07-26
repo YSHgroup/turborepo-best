@@ -21,9 +21,11 @@
     "@fortawesome/angular-fontawesome": "^0.15.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@popperjs/core": "^2.11.8",
+    "@sweetalert2/ngx-sweetalert2": "^12.4.0",
     "bootstrap": "^5.3.3",
     "json-server": "^1.0.0-beta.1",
     "rxjs": "~7.8.0",
+    "sweetalert2": "^11.12.3",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"
   },
