@@ -8,7 +8,7 @@ import {
   transition,
 } from '@angular/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 import { TaskModel } from '../../models/kaban';
 
@@ -34,12 +34,13 @@ import { TaskModel } from '../../models/kaban';
 })
 export class TaskItemComponent {
   @Input({ required: true }) task?: TaskModel;
-  faCaretUp = faCaretUp;
+  faCaret = faCaretUp;
   isOpen = true;
 
   constructor() {}
 
   toggle() {
     this.isOpen = !this.isOpen;
+    this.faCaret = this.isOpen? faCaretUp: faCaretDown
   }
 }
