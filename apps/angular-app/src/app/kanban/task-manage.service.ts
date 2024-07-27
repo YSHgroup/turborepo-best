@@ -65,15 +65,20 @@ export class TaskManageService {
     },
   ];
 
+  genId(list: any[]): number {
+    return list.reduce((acc, item) => {
+      return Math.max(acc, item.id);
+    }, 0) + 1;
+  }
+
   getKanbanList() {
     return this.kanbanList ?? [];
   }
-
   addTask(boardId: number, name: string, description: string, color: string) {
     this.kanbanList?.forEach(item => {
       if(item.id === boardId) {
         item.tasks?.push({
-          id: Math.random(),
+          id: this.genId(item.tasks),
           name,
           description,
           color
