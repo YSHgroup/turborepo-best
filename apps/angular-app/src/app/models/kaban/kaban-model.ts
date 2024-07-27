@@ -11,7 +11,7 @@ export interface TaskModel {
   subtasks?: SubtaskModel[];
 }
 
-export interface KabanBoardModel {
+export interface KanbanBoardModel {
   id: number;
   name: string;
   tasks?: TaskModel[];

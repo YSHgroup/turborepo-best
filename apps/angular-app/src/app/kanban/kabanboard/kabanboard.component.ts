@@ -4,7 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { KabanBoardModel } from '../../models/kaban';
+import { KanbanBoardModel } from '../../models/kaban';
 import { NewTaskComponent } from '../modal/new-task/new-task.component';
 import { CommonModule } from '@angular/common';
 
@@ -19,7 +19,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './kabanboard.component.scss',
 })
 export class KabanboardComponent {
-  @Input({ required: true }) taskBoard?: KabanBoardModel;
+  @Input({ required: true }) taskBoard?: KanbanBoardModel;
   faPlus = faPlus;
   isTaskModalOpen = false
 
