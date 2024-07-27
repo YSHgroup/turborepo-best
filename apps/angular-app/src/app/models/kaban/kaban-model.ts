@@ -8,11 +8,11 @@ export interface TaskModel {
   name: string;
   description: string;
   color: string;
-  subtasks: SubtaskModel[];
+  subtasks?: SubtaskModel[];
 }
 
 export interface KabanBoardModel {
   id: number;
   name: string;
-  tasks: TaskModel[];
+  tasks?: TaskModel[];
 }
