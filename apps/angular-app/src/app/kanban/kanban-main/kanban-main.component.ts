@@ -4,6 +4,7 @@ import {
   CdkDropList,
   CdkDrag,
   CdkDragDrop,
+  CdkDragPreview,
 } from '@angular/cdk/drag-drop';
 
 import { KabanboardComponent } from '../kabanboard/kabanboard.component';
@@ -20,6 +21,7 @@ import { TaskManageService } from '../task-manage.service';
     CdkDropListGroup,
     CdkDropList,
     CdkDrag,
+    CdkDragPreview,
     KabanboardComponent,
     TaskItemComponent,
   ],

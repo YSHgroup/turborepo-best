@@ -28,7 +28,7 @@ import { TaskManageService } from '../task-manage.service';
         height: '0px',
         overflow: 'hidden'
       })),
-      transition('open => closed, closed => open', [animate('0.3s  ease-in')]),
+      transition('open => closed, closed => open', [animate('0.2s  ease-in')]),
     ]),
   ],
   templateUrl: './task-item.component.html',

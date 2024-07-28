@@ -2,7 +2,16 @@
     <ng-container *ngFor="let item of kanbanList">
         <app-kabanboard [taskBoard]="item" cdkDropList (cdkDropListDropped)="drop(item.id, $event)">
             <ng-container *ngFor="let task of item.tasks">
-                <app-task-item [task]="task" [boardId]="item.id" cdkDrag (cdkDragStarted)="drag(item.id)"></app-task-item>
+                <div cdkDrag (cdkDragStarted)="drag(item.id)">
+                    <app-task-item [task]="task" [boardId]="item.id">
+                    </app-task-item>
+                    <div class="card text-bg-info mb-3" style="max-width: 16rem; height: fit-content;" *cdkDragPreview>
+                        <div class="card-header fw-bold">{{task.name}}</div>
+                        <div class="card-body">
+                          <p class="card-text">{{task.description}}</p>
+                        </div>
+                      </div>
+                </div>
             </ng-container>
         </app-kabanboard>
     </ng-container>
