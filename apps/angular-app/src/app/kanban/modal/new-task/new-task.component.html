@@ -1,0 +1,79 @@
+<div
+  class="vw-100 vh-100 top-0 start-0 z-3 position-fixed d-flex justify-content-center align-items-center"
+>
+  <div class="w-100 h-100 bg-secondary opacity-50"></div>
+  <div
+    class="card mw-100 bg-white border shadow position-fixed"
+    style="width: 500px"
+  >
+    <div class="card-header text-center">
+      <h4>New Task</h4>
+    </div>
+    <form class="card-body" [formGroup]="taskForm">
+      <div class="mb-2">
+        <label for="new-task-title" class="form-label">Title</label>
+        <input
+          type="text"
+          id="new-task-title"
+          class="form-control"
+          formControlName="name"
+          placeholder="Input title"
+        />
+        <span
+          class="text-danger mt-1 text-start ms-1 fs-6"
+          *ngIf="
+            (taskForm.get('name')?.touched || taskForm.get('name')?.dirty) &&
+            taskForm.get('name')?.hasError('required')
+          "
+        >
+          Please input title of task.
+        </span>
+        <span
+          class="text-danger mt-1 text-start ms-1 fs-6"
+          *ngIf="
+          (taskForm.get('name')?.touched || taskForm.get('name')?.dirty) &&
+            taskForm.get('name')?.hasError('minlength')
+          "
+        >
+          Must be at least 3 characters.
+        </span>
+      </div>
+      <div class="mb-2">
+        <label for="new-task-description" class="form-label">Description</label>
+        <textarea
+          id="new-task-description"
+          class="form-control"
+          row="3"
+          formControlName="description"
+          placeholder="Input description"
+        ></textarea>
+        <span
+          class="text-danger mt-1 text-start ms-1 fs-6"
+          *ngIf="
+          (taskForm.get('description')?.touched || taskForm.get('description')?.dirty) &&
+            taskForm.get('description')?.hasError('required')
+          "
+        >
+          Please input description.
+        </span>
+      </div>
+      <div class="mb-2">
+        <label for="new-task-color" class="form-label">Color</label>
+        <input
+          type="color"
+          id="new-task-color"
+          class="form-control form-control-color"
+          formControlName="color"
+        />
+      </div>
+    </form>
+    <div class="ms-auto btn-group m-3">
+      <button class="btn bg-primary text-white" (click)="confirm()">
+        Confirm
+      </button>
+      <button class="btn bg-danger text-white" (click)="clickCancel()">
+        Cancel
+      </button>
+    </div>
+  </div>
+</div>

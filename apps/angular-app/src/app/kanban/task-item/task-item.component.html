@@ -1,0 +1,21 @@
+<div class="task-card border rounded-end-2 p-2">
+    <div class="color-bar" [style.border-right-color]="task?.color"></div>
+    <p class="task-title m-0 fw-semibold pb-1 mb-1 border-bottom">
+        <span>{{task?.name}}</span>
+        <span class="float-end btn-caret" (click)="toggle()"><fa-icon [icon]="faCaret"></fa-icon></span>
+    </p>
+    <div [@toggleTask]="isOpen ? 'open' : 'closed'">
+        <p class="task-description  m-0">
+            {{task?.description}}
+        </p>
+        <ul>
+            <li *ngFor="let subtask of task?.subtasks">{{subtask.content}}</li>
+        </ul>
+        <div class="sub-task-input">
+            <div class="input-group mb-3">
+                <span class="input-group-text" >New</span>
+                <input type="text" class="form-control" [(ngModel)]="subtask" (keyup.enter)="inputSubTask()" placeholder="Input subtask text">
+            </div>
+        </div>
+    </div>
+</div>
