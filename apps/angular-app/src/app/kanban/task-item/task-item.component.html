@@ -14,7 +14,7 @@
         <div class="sub-task-input">
             <div class="input-group mb-3">
                 <span class="input-group-text" >New</span>
-                <input type="text" class="form-control" placeholder="Input subtask text">
+                <input type="text" class="form-control" [(ngModel)]="subtask" (keyup.enter)="inputSubTask()" placeholder="Input subtask text">
             </div>
         </div>
     </div>

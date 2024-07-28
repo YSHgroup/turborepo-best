@@ -2,7 +2,7 @@
     <ng-container *ngFor="let item of kanbanList">
         <app-kabanboard [taskBoard]="item">
             <ng-container *ngFor="let task of item.tasks">
-                <app-task-item [task]="task"></app-task-item>
+                <app-task-item [task]="task" [boardId]="item.id"></app-task-item>
             </ng-container>
         </app-kabanboard>
     </ng-container>

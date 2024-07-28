@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   animate,
@@ -11,11 +11,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons';
 
 import { TaskModel } from '../../models/kaban';
+import { FormsModule } from '@angular/forms';
+import { TaskManageService } from '../task-manage.service';
 
 @Component({
   selector: 'app-task-item',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule],
   animations: [
     trigger('toggleTask', [
       state('open', style({
@@ -34,6 +36,10 @@ import { TaskModel } from '../../models/kaban';
 })
 export class TaskItemComponent {
   @Input({ required: true }) task?: TaskModel;
+  @Input({required: true}) boardId: number | null = null
+  taskManageService: TaskManageService = inject(TaskManageService);
+
+  subtask: string | null = null
   faCaret = faCaretUp;
   isOpen = true;
 
@@ -42,5 +48,11 @@ export class TaskItemComponent {
   toggle() {
     this.isOpen = !this.isOpen;
     this.faCaret = this.isOpen? faCaretUp: faCaretDown
+  }
+
+  inputSubTask() {
+    if(!this.subtask?.length) return
+    this.taskManageService.addSubtask(this.boardId as number, this.task!.id, this.subtask as string)
+    this.subtask = ''
   }
 }

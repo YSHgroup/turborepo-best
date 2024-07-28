@@ -45,5 +45,6 @@ export class NewTaskComponent {
       this.taskForm.value.description ?? '',
       this.taskForm.value.color ?? '',
     );
+    this.clickCancel()
   }
 }
