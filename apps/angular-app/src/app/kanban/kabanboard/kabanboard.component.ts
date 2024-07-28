@@ -3,6 +3,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import 'sweetalert2/src/sweetalert2.scss';
+
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { KanbanBoardModel } from '../../models/kaban';
 import { NewTaskComponent } from '../modal/new-task/new-task.component';

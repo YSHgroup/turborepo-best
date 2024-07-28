@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { KanbanBoardModel } from '../models/kaban';
+import { KanbanBoardModel, TaskModel } from '../models/kaban';
 
 @Injectable({
   providedIn: 'root',
@@ -65,6 +65,7 @@ export class TaskManageService {
       ],
     },
   ];
+  idOndrag: number | null = null
 
   constructor() {}
 
@@ -101,5 +102,20 @@ export class TaskManageService {
         });
       }
     });
+  }
+  insertTask(boardId: number, currentIndex: number, previousIndex: number){
+    let source: TaskModel;
+
+    this.kanbanList?.forEach((sourceItem) => {
+      if(sourceItem.id === this.idOndrag) {
+        source = sourceItem.tasks!.splice(previousIndex, 1)[0];
+      }
+    })
+
+    this.kanbanList?.forEach((item) => {
+      if (item.id === boardId) {
+        item.tasks?.splice(currentIndex, 0, source)
+      }
+    })
   }
 }

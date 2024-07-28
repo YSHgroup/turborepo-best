@@ -1,8 +1,8 @@
-<div class="container-xl d-flex flex-wrap bg-white my-md-3 rounded-4 kanban-board-container">
+<div class="container-xl d-flex flex-wrap bg-white my-md-3 rounded-4 kanban-board-container" cdkDropListGroup>
     <ng-container *ngFor="let item of kanbanList">
-        <app-kabanboard [taskBoard]="item">
+        <app-kabanboard [taskBoard]="item" cdkDropList (cdkDropListDropped)="drop(item.id, $event)">
             <ng-container *ngFor="let task of item.tasks">
-                <app-task-item [task]="task" [boardId]="item.id"></app-task-item>
+                <app-task-item [task]="task" [boardId]="item.id" cdkDrag (cdkDragStarted)="drag(item.id)"></app-task-item>
             </ng-container>
         </app-kabanboard>
     </ng-container>

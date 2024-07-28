@@ -41,7 +41,7 @@ export class TaskItemComponent {
 
   subtask: string | null = null
   faCaret = faCaretUp;
-  isOpen = true;
+  isOpen = false;
 
   constructor() {}
 
