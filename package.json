@@ -8,7 +8,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dev:vue": "turbo dev --filter=app-vuetify-custom",
     "dev:ng": "turbo dev --filter=angular-app",
-    "dev:next": "turbo dev --filter=web"
+    "dev:next": "turbo dev --filter=web",
+    "dev:server": "turbo dev --filter=server"
   },
   "devDependencies": {
     "@mdi/font": "^7.4.47",
