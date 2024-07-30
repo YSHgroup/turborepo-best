@@ -3,13 +3,20 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import session from 'express-session'
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 import { kanbanRouter } from './routes'
 
 dotenv.config()
 const app: Application = express()
-mongoose.connect(process.env.DB_URI!)
+mongoose
+	.connect(process.env.DB_URI!)
+	.then((result) => {
+		console.log('Connection successful: ', result.connection.name)
+	})
+	.catch((error) => {
+		console.log('Connect error: ', error)
+	})
 
 const port = process.env.PORT || 8000
 
