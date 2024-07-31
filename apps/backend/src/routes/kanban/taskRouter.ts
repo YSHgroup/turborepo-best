@@ -14,7 +14,7 @@ router.get('/task/get', (req: Request, res: Response) => {
 })
 
 router.get('/task/get/:id', (req: Request, res: Response) => {
-    console.log('id: ', req.params.id)
+	console.log('id: ', req.params.id)
 	Task.find({ _id: req.params.id })
 		.then((result) => {
 			res.status(200).json(result)
@@ -46,16 +46,20 @@ router.post('/task/create', (req: Request, res: Response) => {
 		})
 })
 
-router.patch('/task/update', (req: Request, res: Response) => {
-	const task = new Task(req.body.task)
-
-	Task.updateOne(
-		{ id: req.body.id },
+router.put('/task/update/:id', (req: Request, res: Response) => {
+	Task.findByIdAndUpdate(
+		req.params.id,
 		{
 			$set: req.body.task,
 		},
-		{ upsert: true }
+		{ upsert: true, new: true }
 	)
+		.then((result) => {
+			res.status(200).json(result)
+		})
+		.catch((error) => {
+			res.status(500).json({ message: 'Error updating task', error: error })
+		})
 })
 
 export { router as kanbanTaskRouter }
