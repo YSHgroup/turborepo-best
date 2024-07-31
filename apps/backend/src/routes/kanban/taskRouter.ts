@@ -62,4 +62,14 @@ router.put('/task/update/:id', (req: Request, res: Response) => {
 		})
 })
 
+router.delete('/task/delete/:id', (req: Request, res: Response) => {
+	Task.findByIdAndDelete(req.params.id)
+		.then((result) => {
+			res.status(200).json(result)
+		})
+		.catch((error) => {
+			res.status(500).json({ message: 'Error deleting task', error: error })
+		})
+})
+
 export { router as kanbanTaskRouter }
