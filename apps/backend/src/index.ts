@@ -5,8 +5,7 @@ import bodyParser from 'body-parser'
 import session from 'express-session'
 import mongoose from 'mongoose'
 
-import { kanbanRouter } from './routes'
-import { kanbanGetRouter } from './routes/kanban/get'
+import { kanbanTaskRouter } from './routes'
 
 dotenv.config()
 const app: Application = express()
@@ -47,7 +46,7 @@ app.get('/', (req: Request, res: Response) => {
 	res.json('Welcome to Express & TypeScript Server')
 })
 
-app.use('/kanban', [kanbanRouter, kanbanGetRouter])
+app.use('/kanban', [kanbanTaskRouter])
 
 app.listen(port, () => {
 	console.log('=========================================')

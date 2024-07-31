@@ -11,4 +11,3 @@ router.get('/get-task', (req: Request, res: Response) => {
     })
 })
 
-export {router as kanbanGetRouter}
