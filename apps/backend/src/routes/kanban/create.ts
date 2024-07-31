@@ -1,5 +1,5 @@
 import {Request, Response, Router} from 'express'
-import { Task } from '../../Schemas/kanban'
+import { Task } from '@/Schemas/kanban'
 
 const router = Router()
 
