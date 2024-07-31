@@ -25,10 +25,7 @@ router.get('/task/get/:id', (req: Request, res: Response) => {
 })
 
 router.post('/task/create', (req: Request, res: Response) => {
-	console.log('request: ', req.body.task)
 	const task = new Task(req.body.task)
-
-	// console.log(task.validateSync(), ' : pre-validation')
 
 	task
 		.save()
@@ -47,13 +44,10 @@ router.post('/task/create', (req: Request, res: Response) => {
 })
 
 router.put('/task/update/:id', (req: Request, res: Response) => {
-	Task.findByIdAndUpdate(
-		req.params.id,
-		{
-			$set: req.body.task,
-		},
-		{ upsert: true, new: true }
-	)
+	Task.findByIdAndUpdate(req.params.id, req.body.task, {
+		upsert: true,
+		new: true,
+	})
 		.then((result) => {
 			res.status(200).json(result)
 		})
@@ -148,14 +142,16 @@ router.delete('task/:id/subtask/:subtaskId', (req: Request, res: Response) => {
 			$pull: { _id: subtaskId },
 		},
 		{ new: true }
-	).then((result) => {
-		if (!result) {
-			return res.status(404).json({ message: 'Task or subtask not found' })
-		}
-		res.status(200).json(result)
-	}).catch(error => {
-		res.status(500).json({ message: 'Error deleting subtask', error: error })
-	})
+	)
+		.then((result) => {
+			if (!result) {
+				return res.status(404).json({ message: 'Task or subtask not found' })
+			}
+			res.status(200).json(result)
+		})
+		.catch((error) => {
+			res.status(500).json({ message: 'Error deleting subtask', error: error })
+		})
 })
 
 export { router as kanbanTaskRouter }
