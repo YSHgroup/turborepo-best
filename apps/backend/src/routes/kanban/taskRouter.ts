@@ -72,4 +72,18 @@ router.delete('/task/delete/:id', (req: Request, res: Response) => {
 		})
 })
 
+router.post('/task/:id/subtasks', (req: Request, res: Response) => {
+	Task.findByIdAndUpdate(
+		req.params.id,
+		{
+			$push: { subtasks: req.body.subtask },
+		},
+		{ new: true }
+	).then(result => {
+		res.status(201).json(result)
+	}).catch(error => {
+		res.status(500).json({ message: 'Error inserting subtask', error: error })
+	})
+})
+
 export { router as kanbanTaskRouter }

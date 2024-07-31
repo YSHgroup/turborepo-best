@@ -1,10 +1,13 @@
 import { model, Schema } from 'mongoose'
 
+const subtaskSchema = new Schema({
+	content: String,
+})
 const taskSchema = new Schema({
 	name: { type: String, required: true },
 	description: { type: String, required: true },
 	color: { type: String, required: true },
-	subtasks: { type: [{ content: String }], default: [] },
+	subtasks: { type: [subtaskSchema], default: [] },
 })
 
 const kanbanBoardSchema = new Schema({
