@@ -13,8 +13,13 @@ const taskSchema = new Schema({
 const kanbanBoardSchema = new Schema({
 	name: { type: String, required: true },
 	tasks: {
-		type: Schema.ObjectId,
-		ref: 'Task',
+		type: [
+			{
+				type: Schema.ObjectId,
+				ref: 'Task',
+			},
+		],
+		default: [],
 	},
 })
 

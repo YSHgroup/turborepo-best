@@ -4,7 +4,7 @@ import { Kanbanboard } from '@/Schemas/kanban'
 const router = Router()
 
 router.get('/board', (req: Request, res: Response) => {
-	Kanbanboard.find()
+	Kanbanboard.find().populate('tasks')
 		.then((result) => {
 			res.status(200).json(result)
 		})
@@ -13,7 +13,7 @@ router.get('/board', (req: Request, res: Response) => {
 		})
 })
 
-router.get('/board', (req: Request, res: Response) => {
+router.post('/board', (req: Request, res: Response) => {
 	const boardData = new Kanbanboard(req.body.boardData)
 
 	boardData

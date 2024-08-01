@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express'
-import { Task } from '@/Schemas/kanban'
+import { Kanbanboard, Task } from '@/Schemas/kanban'
 
 const router = Router()
 
@@ -27,9 +27,27 @@ router.get('/task/get/:id', (req: Request, res: Response) => {
 router.post('/task/create', (req: Request, res: Response) => {
 	const task = new Task(req.body.task)
 
+	if (!req.body.boardId) {
+		return res.status(400).json({ message: 'board_id is required' })
+	}
+
 	task
 		.save()
 		.then((result) => {
+			console.log('id: ', result.id)
+			Kanbanboard.findByIdAndUpdate(
+				req.body.boardId,
+				{
+					$push: {
+						tasks: result._id,
+					},
+				},
+				{ upsert: true, new: true }
+			).then(resultFromKanban => {
+				console.log("kanban: ", resultFromKanban)
+			}).catch(error => {
+				console.log("error: ", error)
+			})
 			res.status(201).json(result)
 		})
 		.catch((error) => {
