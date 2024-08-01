@@ -48,4 +48,21 @@ router.put('/board/:id', (req: Request, res: Response) => {
 		})
 })
 
+router.delete('/board/:id', (req: Request, res: Response) => {
+  const boardId = req.params.id;
+
+  Kanbanboard.findByIdAndDelete(boardId)
+    .then(result => {
+      if (!result) {
+        // If no board was found, return a 404 response
+        return res.status(404).json({ message: 'Board not found' });
+      }
+      // Return a success message or the deleted board
+      res.status(200).json({ message: 'Board deleted successfully', deletedBoard: result });
+    })
+    .catch(error => {
+      res.status(500).json({ message: 'Error deleting data', error });
+    });
+});
+
 export { router as boardRouter }

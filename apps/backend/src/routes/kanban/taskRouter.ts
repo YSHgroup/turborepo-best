@@ -17,6 +17,8 @@ router.get('/task/get/:id', (req: Request, res: Response) => {
 	console.log('id: ', req.params.id)
 	Task.find({ _id: req.params.id })
 		.then((result) => {
+			if (!result)
+				return res.status(404).json({ message: 'Task not found by the id' })
 			res.status(200).json(result)
 		})
 		.catch((error) => {
@@ -43,11 +45,13 @@ router.post('/task/create', (req: Request, res: Response) => {
 					},
 				},
 				{ upsert: true, new: true }
-			).then(resultFromKanban => {
-				console.log("kanban: ", resultFromKanban)
-			}).catch(error => {
-				console.log("error: ", error)
-			})
+			)
+				.then((resultFromKanban) => {
+					console.log('kanban: ', resultFromKanban)
+				})
+				.catch((error) => {
+					console.log('error: ', error)
+				})
 			res.status(201).json(result)
 		})
 		.catch((error) => {
@@ -63,10 +67,10 @@ router.post('/task/create', (req: Request, res: Response) => {
 
 router.put('/task/update/:id', (req: Request, res: Response) => {
 	Task.findByIdAndUpdate(req.params.id, req.body.task, {
-		upsert: true,
 		new: true,
 	})
 		.then((result) => {
+			if (!result) return res.status(404).json({ message: 'Task not found' })
 			res.status(200).json(result)
 		})
 		.catch((error) => {
