@@ -1,0 +1,23 @@
+{
+	"compilerOptions": {
+		"target": "es2016",
+		/* Modules */
+		"module": "commonjs",
+		"esModuleInterop": true /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */,
+		"forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
+		/* Type Checking */
+		"strict": true /* Enable all strict type-checking options. */,
+		/* Completeness */
+		// "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
+		"skipLibCheck": true /* Skip type checking all .d.ts files. */,
+
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+
+    "typeRoots": ["./node_modules/@types", "./types"]
+	},
+	"include": ["src/**/*", "types/**/*"],
+	"exclude": ["node_modules"]
+}
