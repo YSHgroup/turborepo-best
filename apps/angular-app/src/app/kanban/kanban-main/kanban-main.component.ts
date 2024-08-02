@@ -41,7 +41,11 @@ export class KanbanMainComponent {
     this.taskManageService.idOndrag = null
   }
 
-  constructor() {
-    this.kanbanList = this.taskManageService.getKanbanList();
+  constructor() { }
+
+  ngOnInit(): void {
+    this.taskManageService.getKanbanList().subscribe(
+      (kanbanList: KanbanBoardModel[]) => this.kanbanList = kanbanList
+    );
   }
 }

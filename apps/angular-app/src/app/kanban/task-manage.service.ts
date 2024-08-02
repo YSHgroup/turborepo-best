@@ -1,73 +1,17 @@
 import { Injectable } from '@angular/core';
 import { KanbanBoardModel, TaskModel } from '../models/kaban';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskManageService {
-  kanbanList?: KanbanBoardModel[] = [
-    {
-      id: 1,
-      name: 'To do',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Progress',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-        {
-          id: 2,
-          name: 'Task 2',
-          description: 'This is task description 2',
-          color: 'greenyellow',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Done',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-  ];
+  baseUrl = 'http://localhost:5000/kanban'
+  kanbanList?: KanbanBoardModel[] = [];
   idOndrag: number | null = null;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   genId(list: any[]): number {
     return (
@@ -77,8 +21,9 @@ export class TaskManageService {
     );
   }
 
-  getKanbanList() {
-    return this.kanbanList ?? [];
+  getKanbanList(): Observable<KanbanBoardModel[]> {
+    // return this.kanbanList ?? [];
+    return this.http.get<KanbanBoardModel[]>(`${this.baseUrl}/board`)
   }
   addTask(boardId: number, name: string, description: string, color: string) {
     this.kanbanList?.forEach((item) => {
