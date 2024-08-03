@@ -28,11 +28,10 @@ router.get('/task/get/:id', (req: Request, res: Response) => {
 
 router.post('/task/create', (req: Request, res: Response) => {
 	const task = new Task(req.body.task)
-
+	
 	if (!req.body.boardId) {
 		return res.status(400).json({ message: 'board_id is required' })
 	}
-
 	task
 		.save()
 		.then((result) => {

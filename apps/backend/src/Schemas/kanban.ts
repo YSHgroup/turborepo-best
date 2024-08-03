@@ -8,7 +8,7 @@ const taskSchema = new Schema({
 	description: { type: String, required: true },
 	color: { type: String, required: true },
 	subtasks: { type: [subtaskSchema], default: [] },
-})
+}, { timestamps: true })
 
 const kanbanBoardSchema = new Schema({
 	name: { type: String, required: true },
@@ -21,7 +21,7 @@ const kanbanBoardSchema = new Schema({
 		],
 		default: [],
 	},
-})
+}, { timestamps: true })
 
 const Task = model('Task', taskSchema)
 const Kanbanboard = model('kanbanboard', kanbanBoardSchema)
