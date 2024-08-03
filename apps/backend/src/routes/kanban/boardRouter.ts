@@ -4,6 +4,8 @@ import { Kanbanboard } from '@/Schemas/kanban'
 const router = Router()
 
 router.get('/board', (req: Request, res: Response) => {
+	// res.header('Access-Control-Allow-Origin', 'http://localhost:4200')
+	
 	Kanbanboard.find().populate('tasks')
 		.then((result) => {
 			res.status(200).json(result)

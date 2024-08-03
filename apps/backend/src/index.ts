@@ -40,6 +40,10 @@ app.use(
 // next middleware function
 app.use(function (req, res, next) {
 	console.log('A request for things received at ' + Date.now())
+	res.header('Access-Control-Allow-Origin', 'http://localhost:4200')
+	res.header('Access-Control-Allow-Headers', 'Content-Type')
+	// console.log('req: ', req.body)
+	
 	next()
 })
 
