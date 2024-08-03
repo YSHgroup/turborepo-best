@@ -16,7 +16,7 @@ import { TaskManageService } from '../../task-manage.service';
   styleUrl: './new-task.component.scss',
 })
 export class NewTaskComponent {
-  @Input() boardId?: number = 0;
+  @Input() boardId?: string;
   @Output() close = new EventEmitter();
 
   taskManageService: TaskManageService = inject(TaskManageService);

@@ -36,7 +36,7 @@ import { TaskManageService } from '../task-manage.service';
 })
 export class TaskItemComponent {
   @Input({ required: true }) task?: TaskModel;
-  @Input({required: true}) boardId: number | null = null
+  @Input({required: true}) boardId: string | null = null
   taskManageService: TaskManageService = inject(TaskManageService);
 
   subtask: string | null = null
@@ -52,7 +52,7 @@ export class TaskItemComponent {
 
   inputSubTask() {
     if(!this.subtask?.length) return
-    this.taskManageService.addSubtask(this.boardId as number, this.task!.id, this.subtask as string)
+    this.taskManageService.addSubtask(this.boardId as string, this.task!._id, this.subtask as string)
     this.subtask = ''
   }
 }

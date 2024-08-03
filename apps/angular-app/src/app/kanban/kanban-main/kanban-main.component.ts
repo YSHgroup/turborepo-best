@@ -32,11 +32,11 @@ export class KanbanMainComponent {
   taskManageService: TaskManageService = inject(TaskManageService);
   kanbanList: KanbanBoardModel[] = [];
 
-  drag(boardId: number) {
+  drag(boardId: string) {
     this.taskManageService.idOndrag = boardId
   }
 
-  drop(boardId: number, event: CdkDragDrop<string[]>) {
+  drop(boardId: string, event: CdkDragDrop<string[]>) {
     this.taskManageService.insertTask(boardId, event.currentIndex, event.previousIndex)
     this.taskManageService.idOndrag = null
   }
