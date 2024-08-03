@@ -7,7 +7,7 @@ import { catchError, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskManageService {
-  baseUrl = 'http://localhost:5000/kanban';
+  baseUrl = 'api/kanban';
   baseHeaders = new HttpHeaders({ 'Sec-Fetch-Mode': 'no-cors' });
   kanbanList?: KanbanBoardModel[] = [];
   idOndrag: string | null = null;
