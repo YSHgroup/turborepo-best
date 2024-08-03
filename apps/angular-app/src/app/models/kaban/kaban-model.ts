@@ -1,10 +1,10 @@
 export interface SubtaskModel {
-  id: number;
+  _id: string;
   content: string;
 }
 
 export interface TaskModel {
-  id: number;
+  _id: string;
   name: string;
   description: string;
   color: string;
@@ -12,7 +12,7 @@ export interface TaskModel {
 }
 
 export interface KanbanBoardModel {
-  id: number;
+  _id: string;
   name: string;
   tasks?: TaskModel[];
 }

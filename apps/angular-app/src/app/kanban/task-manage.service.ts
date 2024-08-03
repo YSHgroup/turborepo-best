@@ -1,73 +1,18 @@
 import { Injectable } from '@angular/core';
 import { KanbanBoardModel, TaskModel } from '../models/kaban';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskManageService {
-  kanbanList?: KanbanBoardModel[] = [
-    {
-      id: 1,
-      name: 'To do',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 2,
-      name: 'Progress',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-        {
-          id: 2,
-          name: 'Task 2',
-          description: 'This is task description 2',
-          color: 'greenyellow',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: 'Done',
-      tasks: [
-        {
-          id: 1,
-          name: 'Task 1',
-          description: 'This is task description 1',
-          color: 'red',
-          subtasks: [
-            { id: 1, content: 'Create task' },
-            { id: 2, content: 'Update task' },
-          ],
-        },
-      ],
-    },
-  ];
-  idOndrag: number | null = null;
+  baseUrl = 'api/kanban';
+  baseHeaders = new HttpHeaders({ 'Sec-Fetch-Mode': 'no-cors' });
+  kanbanList?: KanbanBoardModel[] = [];
+  idOndrag: string | null = null;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   genId(list: any[]): number {
     return (
@@ -77,49 +22,83 @@ export class TaskManageService {
     );
   }
 
-  getKanbanList() {
-    return this.kanbanList ?? [];
-  }
-  addTask(boardId: number, name: string, description: string, color: string) {
-    this.kanbanList?.forEach((item) => {
-      if (item.id === boardId) {
-        item.tasks?.push({
-          id: this.genId(item.tasks),
-          name,
-          description,
-          color,
-          subtasks: [],
-        });
-      }
+  getKanbanList(): Observable<KanbanBoardModel[]> {
+    // return this.kanbanList ?? [];
+    return this.http.get<KanbanBoardModel[]>(`${this.baseUrl}/board`, {
+      headers: this.baseHeaders,
     });
   }
-  addSubtask(boardId: number, taskId: number, content: string) {
-    this.kanbanList?.forEach((item) => {
-      if (item.id === boardId) {
-        item.tasks?.forEach((task) => {
-          if (task.id === taskId) {
-            task.subtasks?.push({ id: this.genId(task.subtasks), content });
-          }
-        });
-      }
-    });
+
+  addTask(boardId: string, name: string, description: string, color: string) {
+    console.log('id: ', boardId);
+
+    const payload = {
+      boardId,
+      task: {
+        name,
+        description,
+        color,
+      },
+    };
+
+    this.http.post(`${this.baseUrl}/task/create`, payload)
+      .pipe(
+        catchError(this.errorHandler<KanbanBoardModel>())
+      ).subscribe({
+        next: (res) => {
+          console.log('data: ', res)
+        },
+        error: error => {
+          console.error('Error adding task:', error);
+          // Additional error handling if needed
+        }
+      })
+    // this.kanbanList?.forEach((item) => {
+    //   if (item._id === boardId) {
+    //     item.tasks?.push({
+    //       _id: this.genId(item.tasks),
+    //       name,
+    //       description,
+    //       color,
+    //       subtasks: [],
+    //     });
+    //   }
+    // });
   }
-  insertTask(boardId: number, currentIndex: number, previousIndex: number) {
+  addSubtask(boardId: string, taskId: string, content: string) {
+    // this.kanbanList?.forEach((item) => {
+    //   if (item._id === boardId) {
+    //     item.tasks?.forEach((task) => {
+    //       if (task._id === taskId) {
+    //         task.subtasks?.push({ _id: this.genId(task.subtasks), content });
+    //       }
+    //     });
+    //   }
+    // });
+  }
+  insertTask(boardId: string, currentIndex: number, previousIndex: number) {
     let source: TaskModel;
 
-    this.kanbanList?.forEach((sourceItem) => {
-      if (sourceItem.id === this.idOndrag) {
-        source = {
-          ...sourceItem.tasks!.splice(previousIndex, 1)[0],
-          id: this.genId(sourceItem.tasks!),
-        };
-      }
-    });
+    // this.kanbanList?.forEach((sourceItem) => {
+    //   if (sourceItem._id === this.idOndrag) {
+    //     source = {
+    //       ...sourceItem.tasks!.splice(previousIndex, 1)[0],
+    //       _id: this.genId(sourceItem.tasks!),
+    //     };
+    //   }
+    // });
 
     this.kanbanList?.forEach((item) => {
-      if (item.id === boardId) {
+      if (item._id === boardId) {
         item.tasks?.splice(currentIndex, 0, source);
       }
     });
+  }
+
+  private errorHandler<T>(result?: T) {
+    return <O>(error: any, caught: Observable<O>) => {
+      console.log('Error: ', error, 'Caught: ', caught);
+      return of(result)
+    }
   }
 }

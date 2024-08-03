@@ -11,5 +11,5 @@
 </div>
 
 <ng-container *ngIf="isTaskModalOpen">
-  <app-new-task (close)="closeTaskModal()" [boardId]="taskBoard?.id" />
+  <app-new-task (close)="closeTaskModal()" [boardId]="taskBoard?._id" />
 </ng-container>
