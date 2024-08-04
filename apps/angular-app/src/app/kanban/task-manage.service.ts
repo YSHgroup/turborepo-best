@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { KanbanBoardModel, TaskModel } from '../models/kaban';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskManageService {
-  baseUrl = 'api/kanban';
-  baseHeaders = new HttpHeaders({ 'Sec-Fetch-Mode': 'no-cors' });
-  kanbanList?: KanbanBoardModel[] = [];
+  private baseUrl = 'api/kanban';
+  private baseHeaders = new HttpHeaders({ 'Sec-Fetch-Mode': 'no-cors' });
+  private kanbanSubject = new BehaviorSubject<KanbanBoardModel[]>([])
+  kanbanList$ = this.kanbanSubject.asObservable()
   idOndrag: string | null = null;
 
   constructor(private http: HttpClient) {}
@@ -47,6 +48,7 @@ export class TaskManageService {
       ).subscribe({
         next: (res) => {
           console.log('data: ', res)
+          this.updateKanban()
         },
         error: error => {
           console.error('Error adding task:', error);
@@ -65,6 +67,11 @@ export class TaskManageService {
     //   }
     // });
   }
+
+  updateKanban() {
+    this.getKanbanList().subscribe(data => this.kanbanSubject.next(data))   
+  }
+
   addSubtask(boardId: string, taskId: string, content: string) {
     // this.kanbanList?.forEach((item) => {
     //   if (item._id === boardId) {
@@ -88,11 +95,11 @@ export class TaskManageService {
     //   }
     // });
 
-    this.kanbanList?.forEach((item) => {
-      if (item._id === boardId) {
-        item.tasks?.splice(currentIndex, 0, source);
-      }
-    });
+    // this.kanbanList?.forEach((item) => {
+    //   if (item._id === boardId) {
+    //     item.tasks?.splice(currentIndex, 0, source);
+    //   }
+    // });
   }
 
   private errorHandler<T>(result?: T) {

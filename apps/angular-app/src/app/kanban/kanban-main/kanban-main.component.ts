@@ -44,8 +44,10 @@ export class KanbanMainComponent {
   constructor() { }
 
   ngOnInit(): void {
-    this.taskManageService.getKanbanList().subscribe(
+    this.taskManageService.kanbanList$.subscribe(
       (kanbanList: KanbanBoardModel[]) => this.kanbanList = kanbanList
     );
+
+    this.taskManageService.updateKanban()
   }
 }
