@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express'
+import { Types } from 'mongoose'
 import { Kanbanboard, Task } from '@/Schemas/kanban'
 
 const router = Router()
@@ -28,30 +29,25 @@ router.get('/task/get/:id', (req: Request, res: Response) => {
 
 router.post('/task/create', (req: Request, res: Response) => {
 	const task = new Task(req.body.task)
-	
+
 	if (!req.body.boardId) {
 		return res.status(400).json({ message: 'board_id is required' })
 	}
 	task
 		.save()
 		.then((result) => {
-			console.log('id: ', result.id)
-			Kanbanboard.findByIdAndUpdate(
-				req.body.boardId,
-				{
-					$push: {
-						tasks: result._id,
-					},
-				},
-				{ upsert: true, new: true }
-			)
+			insertTaskToBoard(req.body.boardId, result._id)
 				.then((resultFromKanban) => {
+					if (!resultFromKanban) {
+						throw new Error('Kanban board not found.')
+					}
 					console.log('kanban: ', resultFromKanban)
+					res.status(201).json(result)
 				})
 				.catch((error) => {
-					console.log('error: ', error)
+					console.log('Error task inserting.', error)
+					return res.status(500).json({ message: 'Error task inserting.' })
 				})
-			res.status(201).json(result)
 		})
 		.catch((error) => {
 			if (error.name === 'ValidationError') {
@@ -77,6 +73,39 @@ router.put('/task/update/:id', (req: Request, res: Response) => {
 		})
 })
 
+router.patch('/task/:id', (req: Request, res: Response) => {
+	console.log('ids: ', req.body)
+	const { currentId, targetId } = req.body.boardIds
+	Kanbanboard.findByIdAndUpdate(
+		currentId,
+		{ $pull: { tasks: req.params.id } },
+		{ new: true }
+	)
+		.populate('tasks')
+		.then((result) => {
+			if (!result)
+				return res.status(404).json({ message: 'Kanban board not found' })
+			insertTaskToBoard(targetId, req.params.id)
+				.then((resultFromKanban) => {
+					if (!resultFromKanban) {
+						throw new Error('Kanban board not found.')
+					}
+					console.log('kanban: ', resultFromKanban)
+					res.status(200).json(result)
+				})
+				.catch((error) => {
+					console.log('Error task inserting.', error)
+					return res.status(500).json({ message: 'Error task inserting.' })
+				})
+		})
+		.catch((error) => {
+			res.status(500).json({
+				message: 'Error removing task from kanban board.',
+				error: error.message,
+			})
+		})
+})
+
 router.delete('/task/delete/:id', (req: Request, res: Response) => {
 	Task.findByIdAndDelete(req.params.id)
 		.then((result) => {
@@ -88,18 +117,35 @@ router.delete('/task/delete/:id', (req: Request, res: Response) => {
 })
 
 router.post('/task/:id/subtasks', (req: Request, res: Response) => {
-	Task.findByIdAndUpdate(
-		req.params.id,
-		{
-			$push: { subtasks: req.body.subtask },
-		},
-		{ new: true }
-	)
+	Task.findById(req.params.id)
 		.then((result) => {
-			res.status(201).json(result)
+			if (!result) return res.status(404).json({ message: 'Task not found' })
+			if (result) {
+				Task.findByIdAndUpdate(
+					req.params.id,
+					{
+						$push: { subtasks: req.body.subtask },
+					},
+					{ new: true }
+				)
+					.then((result) => {
+						res.status(201).json(result)
+					})
+					.catch((error) => {
+						if (error.name === 'ValidationError') {
+							res
+								.status(422)
+								.json({ message: 'Validation Error', error: error.message })
+						} else {
+							res
+								.status(500)
+								.json({ message: 'Error creating task', error: error })
+						}
+					})
+			}
 		})
 		.catch((error) => {
-			res.status(500).json({ message: 'Error inserting subtask', error: error })
+			res.status(500).json({ message: 'Error creating task', error: error })
 		})
 
 	// const task = await Task.findById(taskId);
@@ -174,5 +220,26 @@ router.delete('task/:id/subtask/:subtaskId', (req: Request, res: Response) => {
 			res.status(500).json({ message: 'Error deleting subtask', error: error })
 		})
 })
+
+// utility
+/**
+ * Insert given task id to the board specified by id to refer tasks
+ * @param boardId Id of board to be target
+ * @param taskId Id of task to insert
+ */
+async function insertTaskToBoard(
+	boardId: string,
+	taskId: string | Types.ObjectId
+) {
+	return Kanbanboard.findByIdAndUpdate(
+		boardId,
+		{
+			$push: {
+				tasks: taskId,
+			},
+		},
+		{ new: true }
+	)
+}
 
 export { router as kanbanTaskRouter }
