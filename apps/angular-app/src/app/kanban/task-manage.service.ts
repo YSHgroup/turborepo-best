@@ -9,9 +9,10 @@ import { catchError, Observable, of, BehaviorSubject } from 'rxjs';
 export class TaskManageService {
   private baseUrl = 'api/kanban';
   private baseHeaders = new HttpHeaders({ 'Sec-Fetch-Mode': 'no-cors' });
-  private kanbanSubject = new BehaviorSubject<KanbanBoardModel[]>([])
-  kanbanList$ = this.kanbanSubject.asObservable()
+  private kanbanSubject = new BehaviorSubject<KanbanBoardModel[]>([]);
+  kanbanList$ = this.kanbanSubject.asObservable();
   idOndrag: string | null = null;
+  taskIdOndrag: string | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -42,19 +43,19 @@ export class TaskManageService {
       },
     };
 
-    this.http.post(`${this.baseUrl}/task/create`, payload)
-      .pipe(
-        catchError(this.errorHandler<KanbanBoardModel>())
-      ).subscribe({
+    this.http
+      .post(`${this.baseUrl}/task/create`, payload)
+      .pipe(catchError(this.errorHandler<KanbanBoardModel>()))
+      .subscribe({
         next: (res) => {
-          console.log('data: ', res)
-          this.updateKanban()
+          console.log('data: ', res);
+          this.updateKanban();
         },
-        error: error => {
+        error: (error) => {
           console.error('Error adding task:', error);
           // Additional error handling if needed
-        }
-      })
+        },
+      });
     // this.kanbanList?.forEach((item) => {
     //   if (item._id === boardId) {
     //     item.tasks?.push({
@@ -69,10 +70,16 @@ export class TaskManageService {
   }
 
   updateKanban() {
-    this.getKanbanList().subscribe(data => this.kanbanSubject.next(data))   
+    this.getKanbanList().subscribe((data) => this.kanbanSubject.next(data));
   }
 
-  addSubtask(boardId: string, taskId: string, content: string) {
+  addSubtask(taskId: string, content: string) {
+    this.http
+      .post(`${this.baseUrl}/task/${taskId}/subtasks`, { subtask: {content} })
+      .subscribe((res) => {
+        console.log('subtask added:', res);
+        this.updateKanban();
+      });
     // this.kanbanList?.forEach((item) => {
     //   if (item._id === boardId) {
     //     item.tasks?.forEach((task) => {
@@ -84,8 +91,17 @@ export class TaskManageService {
     // });
   }
   insertTask(boardId: string, currentIndex: number, previousIndex: number) {
-    let source: TaskModel;
+    console.log('currentIndex: ', this.idOndrag, 'previousIndex: ', previousIndex)
+    if (boardId === this.idOndrag) return 
 
+    const boardIds = {
+      currentId: this.idOndrag,
+      targetId: boardId
+    }
+    this.http.patch(`${this.baseUrl}/task/${this.taskIdOndrag}`, {boardIds}).subscribe(() => {
+      this.updateKanban()
+    })
+    // let source: TaskModel;
     // this.kanbanList?.forEach((sourceItem) => {
     //   if (sourceItem._id === this.idOndrag) {
     //     source = {
@@ -105,7 +121,7 @@ export class TaskManageService {
   private errorHandler<T>(result?: T) {
     return <O>(error: any, caught: Observable<O>) => {
       console.log('Error: ', error, 'Caught: ', caught);
-      return of(result)
-    }
+      return of(result);
+    };
   }
 }

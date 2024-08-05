@@ -52,7 +52,7 @@ export class TaskItemComponent {
 
   inputSubTask() {
     if(!this.subtask?.length) return
-    this.taskManageService.addSubtask(this.boardId as string, this.task!._id, this.subtask as string)
+    this.taskManageService.addSubtask(this.task!._id, this.subtask as string)
     this.subtask = ''
   }
 }
