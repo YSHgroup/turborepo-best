@@ -110,6 +110,8 @@ export async function deleteInvoice(id: string) {
   }
 }
 
+// Email: user@nextmail.com
+// Password: 123456
 export async function authenticate(prevState: string | undefined, formData: FormData)	{
 	try {
 		await signIn('credentials', formData)
