@@ -1,13 +1,24 @@
-# Turborepo starter
+# [Turborepo](https://turbo.build/) - [React](https://react.dev/), [Next.js](https://nextjs.org/), [Vue 3](https://vuejs.org/), [Angular](https://angular.dev/), [Express](https://expressjs.com/)
 
-This is an official starter Turborepo.
+* What is this?
+  - Embedded with tutorials and simple apps for __various modern js frameworks.__
+* This turborepo including:
+  - Next.js, Angular tutorial.
+  - Vue 3 & Vuetify custom component and various pages.
+  - Node/Express backend server.
+![Vue business page](./public/vue-business.png)
+![angular kanban](./public/ng-kanban.png)
+![next dashboard](https://nextjs.org/_next/image?url=%2Flearn%2Fcourse-explainer.png&w=750&q=75&dpl=dpl_Ejtt9BCyCFNeRJdBoVsM9Es9x8xe)
 
-## Using this example
-
-Run the following command:
+## Commands used to init apps
 
 ```sh
 npx create-turbo@latest
+npx create-next-app@latest
+npm create vite@latest
+npm create vue@latest
+ng new angular-app
+npm init express@latest
 ```
 
 ## What's inside?
@@ -15,14 +26,46 @@ npx create-turbo@latest
 This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
+  ***apps***
+- `app-vuetify-custom`: a [Vue](http://vuejs.org) & [Vueitfy](https://vuetifyjs.com/) app
+- `next-tutorial`: another [Next.js](https://nextjs.org/) app
+- `angular-app`: an [Angular](https://angular.dev/) app
+- `server`: a [Node.js](https://nodejs.org/) & [Express](https://expressjs.com/)  
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
+ ***packages***
 - `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
 - `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+
+### [Vue 3](http://vuejs.org)
+- `app-vuetify-custom` is a Vue 3 app with Vuetify.
+  - Implemented vue-router and vuetify
+  - Introduced vuetify-custom components
+  - Several pages including business components
+  - [Git link](https://github.com/YSHgroup/turborepo-best/tree/main/apps/vuetify-custom)
+
+### [Next.js](https://nextjs.org/)
+- `next-tutorial` is a Next.js app with simple dashboard.
+  - come from [Next.js doc](https://nextjs.org/learn/dashboard-app)
+  - Give knowledge of developing next.js app with best practice.
+  - [Git link](https://github.com/YSHgroup/turborepo-best/tree/main/apps/nextjs-dashboard)
+  - [Live link](https://next-tutorial-yshgroup.vercel.app/)
+
+### [Angular](https://angular.dev/)
+- `angular-app` is an Angular app including tutorial and kanbanboard page.
+  - [Git link](https://github.com/YSHgroup/turborepo-best/tree/main/apps/angular-app)
+
+  #### Kanbanboard
+    - Angular 18, Angular Material - CDK, Bootstrap 5
+    - Implemented drag and drop functionality
+    - Utilized Bootstrap library
+    - Integrated with express server
+
+### [Node/Express](https://expressjs.com/)
+- `server` is a Node.js & Express server.
+  - Composed `kanban` router
 
 ### Utilities
 
