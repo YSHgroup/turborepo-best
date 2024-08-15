@@ -6,10 +6,15 @@
   - Next.js, Angular tutorial.
   - Vue 3 & Vuetify custom component and various pages.
   - Node/Express backend server.
-![Vue business page](./public/vue-business.png)
-![angular kanban](./public/ng-kanban.png)
-![next dashboard](https://nextjs.org/_next/image?url=%2Flearn%2Fcourse-explainer.png&w=750&q=75&dpl=dpl_Ejtt9BCyCFNeRJdBoVsM9Es9x8xe)
 
+*Will include more apps than you might imagine.*
+---
+![Vue business page](./public/vue-business.png)
+---
+![angular kanban](./public/ng-kanban.png)
+---
+![next dashboard](https://nextjs.org/_next/image?url=%2Flearn%2Fcourse-explainer.png&w=750&q=75&dpl=dpl_Ejtt9BCyCFNeRJdBoVsM9Es9x8xe)
+---
 ## Commands used to init apps
 
 ```sh
