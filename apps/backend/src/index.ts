@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 import bodyParser from 'body-parser'
 import session from 'express-session'
 import mongoose from 'mongoose'
+import { WebSocketServer } from 'ws'
 
 import { kanbanTaskRouter } from './routes'
 import { boardRouter } from './routes/kanban/boardRouter'
@@ -58,3 +59,28 @@ app.listen(port, () => {
 	console.log(`Server is Fire at http://localhost:${port}`)
 	console.log('=========================================')
 })
+
+//Socket server block
+const wss = new WebSocketServer({ port: 7777 });
+let clients = new Array()
+wss.on('connection', (ws) => {
+	clients.push(ws)
+	console.log('Client connected');
+
+	ws.on('message', (message) => {
+		console.log(`Received message => ${message}`);
+		ws.send(`log:Hello, client!`);
+	});
+	ws.on('close', () => {
+		clients.pop()
+		console.log('Client disconnected');
+	});
+
+	ws.send(`connected:${clients.length}`);
+})
+
+wss.on('error', (err) => {
+	console.log('Error occurred:', err);
+})
+
+console.log('websocket server started on port 7777')
