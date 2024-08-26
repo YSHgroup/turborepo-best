@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
       path: '#',
     },
   ];
-  logos = ['logo-home.svg', 'logo-kanban.svg'];
+  logos = ['logo-home.svg', 'logo-kanban.svg', 'chat (2).png'];
   currentUrl: string = '';
   logo: string = '';
 
@@ -54,6 +54,8 @@ export class AppComponent implements OnInit {
           this.logo = this.logos[0];
         } else if (this.currentUrl.startsWith('/kanban')) {
           this.logo = this.logos[1];
+        } else if(this.currentUrl.startsWith('/chatting')) {
+          this.logo = this.logos[2];
         }
       });
   }
