@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
       path: '/kanban',
     },
     {
-      name: 'Housing',
-      path: '#',
+      name: 'Chatting',
+      path: '/chatting',
     },
     {
       name: 'Housing',
