@@ -7,7 +7,8 @@ import mongoose from 'mongoose'
 import { WebSocketServer } from 'ws'
 
 import { kanbanTaskRouter } from './routes'
-import { boardRouter } from './routes/kanban/boardRouter'
+import { boardRouter } from './routes'
+import { websocketRouter } from './routes'
 
 dotenv.config()
 const app: Application = express()
@@ -53,6 +54,7 @@ app.get('/', (req: Request, res: Response) => {
 })
 
 app.use('/kanban', [kanbanTaskRouter, boardRouter])
+app.use('/websocket', websocketRouter)
 
 app.listen(port, () => {
 	console.log('=========================================')
