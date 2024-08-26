@@ -1,6 +1,8 @@
 import { Server } from 'socket.io'
 
-const io = new Server(5000)
+const io = new Server(5000, {
+  connectionStateRecovery: {}
+})
 
 // this will emit the event to all connected sockets
 io.emit('hello', 'everyone')
