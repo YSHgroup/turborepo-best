@@ -26,7 +26,10 @@ if(Cluster.isPrimary) {
   const io = new Server({
     connectionStateRecovery: {},
     // setup the adapter on each worker thread
-    adapter: createAdapter()
+    adapter: createAdapter(),
+    cors: {
+      origin: '*'
+    }
   })
   
   // this will emit the event to all connected sockets
