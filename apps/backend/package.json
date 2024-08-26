@@ -25,6 +25,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
+    "@socket.io/cluster-adapter": "^0.2.2",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
