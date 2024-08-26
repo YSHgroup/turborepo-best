@@ -1,4 +1,10 @@
 import { Server } from 'socket.io'
+import { dbConnect } from '@/services/sqliteConnect'
+
+let db
+(async function() {
+  db = await dbConnect()
+})()
 
 const io = new Server(5000, {
   connectionStateRecovery: {}
