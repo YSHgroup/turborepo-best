@@ -36,7 +36,7 @@ if(Cluster.isPrimary) {
   io.emit('hello', 'everyone')
   
   io.on('connection', async (socket) => {
-    console.log('a new client connected: ', socket)
+    console.log('a new client connected: ', socket.handshake.address, socket.handshake.address)
   
     socket.on('chat message', async (msg, clientOffset, callback) => {
       console.log('Client sent a message: ', msg)

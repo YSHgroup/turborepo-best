@@ -23,5 +23,6 @@ export class ChatInputComponent {
   sendMsg() {
     const msg = this.inputValue?.trim() ?? ''
     this.chatService.submit(msg)
+    this.inputValue = ''
   }
 }
