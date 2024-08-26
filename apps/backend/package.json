@@ -8,7 +8,7 @@
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "dev": "nodemon -r tsconfig-paths/register src/index.ts",
-    "dev:chat": "nodemon -r tsconfig-path/register src/chat-server",
+    "dev:chat": "nodemon -r tsconfig-paths/register src/chat-server/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
