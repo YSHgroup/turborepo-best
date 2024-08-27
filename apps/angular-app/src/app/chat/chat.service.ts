@@ -11,8 +11,8 @@ export class ChatService {
   incommingMsg$ = this.incommingMsgSubject.asObservable()
 
   constructor() {
-    this.socket.on('chat message', (msg: string) => {
-      console.log('incomming: ',msg)
+    this.socket.on('chat message', (msg: string, id) => {
+      console.log('incomming: ',msg, id)
       this.updateMsg(msg)
     })
    }
