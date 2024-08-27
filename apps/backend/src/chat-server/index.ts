@@ -39,10 +39,10 @@ if(Cluster.isPrimary) {
     console.log('a new client connected: ', socket.handshake.address, socket.handshake.address)
   
     socket.on('chat message', async (msg, clientOffset, callback) => {
-      console.log('Client sent a message: ', msg)
+      console.log('Client sent a message: ', msg, clientOffset)
       let result
       try {
-        result = await db.run('INSERT INTO messages (content, client_offset) VALUES (?)', msg, clientOffset)
+        result = await db.run('INSERT INTO messages (content, client_offset) VALUES (?, ?)', msg, clientOffset)
       } catch (error: any) {
         console.error(error)
         if(error.errno === 19 /* SQLITE_CONSTRAINT */ ) {
@@ -56,7 +56,7 @@ if(Cluster.isPrimary) {
       callback()
     })
   
-    socket.broadcast.emit('Hi') // broadcast to everyone except for a certain emitting socket
+    // socket.broadcast.emit('Hi') // broadcast to everyone except for a certain emitting socket
   
     if(!socket.recovered) {
       try{
