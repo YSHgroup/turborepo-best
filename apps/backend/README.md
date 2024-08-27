@@ -1,5 +1,11 @@
 # Server
-- *What is this server?*
+- *What is this server?*  
+    :serves the several routes for the apps in this turobo
+
+## What are here?
+- Kanbanboard backend
+- Simple websocket backend
+- Socket.io server (separately works)
 
 ## How to init this server?
 - *Create app with TS*  
@@ -22,7 +28,7 @@
     2. Configure and define the type for `req.session.user` in types/express-session.d.ts
     
 ## Routers
-    - *Kanban router*
-
+- *Kanban router*
+- *Websocket router*
         
         

@@ -59,7 +59,10 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
   - [Live link](https://next-tutorial-yshgroup.vercel.app/)
 
 ### [Angular](https://angular.dev/)
-- `angular-app` is an Angular app including tutorial and kanbanboard page.
+- `angular-app` is an Angular app including:  
+     tutorial (housing)  
+     kanbanboard page  
+     chat page
   - [Git link](https://github.com/YSHgroup/turborepo-best/tree/main/apps/angular-app)
 
   #### Kanbanboard
@@ -67,6 +70,10 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
     - Implemented drag and drop functionality
     - Utilized Bootstrap library
     - Integrated with express server
+
+  #### Chat app
+    - Websocket client
+    - TODO: [Link](https://socket.io/docs/v4/tutorial/ending-notes#homework)
 
 ### [Node/Express](https://expressjs.com/)
 - `server` is a Node.js & Express server.

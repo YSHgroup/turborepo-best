@@ -4,7 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 **Includes the following contents:**
 - **Angular tutorial** - Simple app for beginers
-
+- **Kanban Board** - Kanbanboard page developed by angular 18.
+- ****
 
 ## Angular tutorial - House Marketing
 
@@ -13,5 +14,10 @@ Relevant routes:
 ```
 /housing
 /housing/details/:id
+/kanbanboard
+/chatting
 ```
-And to run the json data, run the following command in root level of this app:  `` json-server --watch src/db.json ``
+
+## Relevant
+- And to run the json data, run the following command in root level of this app:  `` json-server --watch src/db.json ``
+- The Kanbanboard and chatting pages work on active servers. (you can find `backend app`)
